@@ -13,24 +13,54 @@ import ShoppingCart from './Routes/shoppingCart';
 import CrearElemento from './Routes/crearElemento';
 import ActualizarInv from './Routes/ActualizarInv';
 import Inventario from './Routes/inventario';
-const App = ()=>{
+import ProductView from './Routes/productView';
+import PaidZone from './Routes/paidZone';
+import Table from './routes/table';
 
-  const arr = [{ ISBN:1, Title:'Calculo vectorial', muestra:200, venta:187, precio:50, img1:'', img2:'' },{ ISBN:2, Title:'Ensayo Academico', muestra:5, venta:0, precio:0, img1:'', img2:'' }]
-  
+const App = ()=>{ 
+    let estado = false
+    const [arr2, setArr2] = React.useState([])
+    const [arr3, setArr3] = React.useState([])
+    React.useEffect(()=>{
+      getData();
+    },[Home])
+
+    React.useEffect(()=>{
+      getData2();
+    },[Login])
+
+    const getData = async ()=>{
+    let url = import.meta.env.VITE_URL_STORE; 
+    url=url+'catalogo';
+    const response = await fetch(url);    
+    const responseJson = await response.json()
+    setArr2(responseJson)
+  }
+  const getData2 = async ()=>{
+    let url = import.meta.env.VITE_URL_LOGIN; 
+    url=url+'view';
+    const response = await fetch(url);    
+    const responseJson = await response.json()
+    setArr3(responseJson)
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-            <Route path="/" element={<Home products={arr}/>} />
+            <Route path="/" element={<Home products={arr2}/>} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/edit" element={<EditProfile/>}/>
             <Route path="/shoppingcart" element={<ShoppingCart/>}/>
-            <Route path="/inventario" element={<Inventario products={arr}/>}/>
+            <Route path="/inventario" element={<Inventario products={arr2}/>}/>
             <Route path="/create" element={<CrearElemento/>}/>
-            <Route path="/update" element={<ActualizarInv/>}/>
+            <Route path="/update/:ISBN" element={<ActualizarInv data={arr2}/>}/>
+            <Route path="/view/:ISBN" element={<ProductView data={arr2}/>}/>
             <Route path='/FAQ' element={<FAQ/>}/>
+            <Route path='/paid' element={<PaidZone/>}/>
+            <Route path='/table' element={<Table data={arr3}/>}/>
             {/* pagina no encontrada */}            
             <Route path="*" element={<Notfound />} />
         </Routes>
@@ -38,24 +68,4 @@ const App = ()=>{
     </div>
   )
 }
-
 export default App;
-
-
-/*const url =`${import.meta.env.VITE_URL_STORE}catalogo`;
-  const [todos,setTodos] = useState()*/
-  /*const fetchApi = async ()=>{
-    const response = await fetch(url);
-    
-    console.log(response)
-    const responseJson = await response.json()
-    console.log(responseJson)
-    setTodos(responseJson)
-  }*/
-  /*useEffect(()=>{
-    fetch(url)
-    .then((res)=>res.json())
-    .then((data)=>setTodos(data))
-    .catch((err)=>console.log(err));
-    //fetchApi()
-  },[])*/

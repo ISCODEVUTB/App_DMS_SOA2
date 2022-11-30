@@ -1,22 +1,25 @@
 import React from "react"
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import Card from '../components/card';
-import '../components/styles/Home.css'
-class Home extends React.Component {
-  render(){
-    console.log(this.props.products);
+import Navbar from "../components/navbar";
+import Footer from "../components/footer"
+import Card from '../components/card.jsx';
+import '../components/styles/Home.css';
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+const Home = (props)=>{
     return (
       <div className="home">
-        <Navbar/>
-        <div className="Content">
-          <p>pagina principal</p>
-          {this.props.products.map( data =><Card data={data}/>)}
+        <Navbar />
+        <div className="content">
+          <div className="top-content">
+            <h1>Bienvenido a SDGD</h1>
+            <p>A continuación puedes ver nuestros libros disponibles</p>
+          </div>
+          <div className="grid-Content">
+            {props.products.map( data =><Card key={data.ISBN} data={data}/>)}
+          </div>        
         </div>
         <Footer/>
       </div>
     )
-  }
-  
-  }
-  export default Home;
+  }  
+export default Home;

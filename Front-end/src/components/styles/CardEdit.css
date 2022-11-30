@@ -1,0 +1,60 @@
+.cardE{
+    border-radius: 5px;
+    color: #111C1C;
+    width: 200px;
+}
+.cardE img{
+    border-radius: 5px;
+    width:200px;
+    height: 260px;
+}
+.cardE h3{
+    margin: 3px auto 5px 5px;
+}
+
+.cardE p{
+    margin: 0 auto 2px 5px;
+}
+
+
+.cardE button{
+    margin-top: 5px;
+    width: 200px;
+    height: 50px;
+    padding: 0;
+}
+
+.btn-delete{
+    background-color: #812828;
+    color: black;
+}
+
+.cardE button:hover{
+    background-color:rgb(55, 113, 94);
+    color: whitesmoke;
+}
+
+.cardE .btn-delete:hover{
+    background-color:rgb(114, 25, 25);
+    color: rgb(255, 255, 255);
+}
+.cardinfo {
+    border-radius: 5px;
+    padding-top: 5px;
+    background-color: #406164;
+    height: 70px;
+    margin: 0;
+}
+
+@media (max-width: 600px){
+    .cardE{
+        width: 180px;
+        
+    }
+    .cardE button{
+        display: block;
+        font-size:15px;
+        padding: 0px;
+        height: 50px;
+    }
+}

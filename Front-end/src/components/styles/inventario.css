@@ -1,20 +1,23 @@
-.content{
+div .Content{
     background-color: #111C1C;
-    display: flex;
-    flex-direction: column;
     border-radius: 5px;
+    max-width: 65vw;
     padding: 25px;
-    max-width: 1000px;
     margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
 }
 
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
 .grid-Content{
     display: grid;
     grid-template-columns: auto auto auto auto;
-    grid-gap: 50px;
-    justify-content: center;
 }
 
 @media (max-width: 500px){
