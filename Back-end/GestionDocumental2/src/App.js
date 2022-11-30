@@ -1,12 +1,12 @@
 const {insert, read, update, dbDelete, readSpecific, readSpecific2} = require('./db.js')
 const express = require('express');
 const { config } =  require('dotenv')
-
+const cors = require('cors')
 config()
 const PORT = process.env.PORT || 8080;
 
 const app = express();
-
+app.use(cors());
 
 app.use(express.json())
 
@@ -69,12 +69,12 @@ app.put('/update',(req,res)=>{
 
 
 
-app.delete('/delete',(req,res)=>{
-    if(req.body.ISBN == null){
+app.delete('/delete/:id',(req,res)=>{
+    /*if(req.body.ISBN == null){
         res.status(404).json({"message":"Not found"});
-    }else{
-       dbDelete(req.body.ISBN, (result)=>res.json(result))
-    }
+    }else{*/
+       dbDelete(parseInt(req.params.id), (result)=>res.json(result))
+    //}
 })
 
 app.use((req,res)=>{

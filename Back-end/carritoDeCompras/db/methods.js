@@ -23,7 +23,7 @@ const CreateList =(req, res)=>{
     order.save().then(
         (doc)=>{
             console.log(`Nueva orden con id: ${order.id} creado`,doc);
-            res.status(200).json({response:'success'})  
+            res.status(200).json({response:'success',doc})  
             if(req.body.bag.length>1){
                 for(let data in req.body.bag){
                     update(req.body.bag[data],(result)=>console.log(result))
@@ -39,6 +39,18 @@ const CreateList =(req, res)=>{
         }
     )
     
+}
+
+const viewSpesific = (req, res)=>{
+    const { id, UserID } = req.params;
+    modelCart.find({_id:id, UserID:UserID},'UserID bag')
+    .then(doc =>{        
+        res.status(200).json(doc[0]) 
+        //correctiondb(doc[0]["bag"])
+    })
+    .catch(err=>{ 
+        res.status(200).json({message:'error'})   
+        console.log(err.message)})
 }
 
 const UpdateList =(req, res)=>{
@@ -91,4 +103,4 @@ const DeleteFromList =(req, res)=>{
 
 }
 
-module.exports = { getList, CreateList, UpdateList, DeleteFromList }
+module.exports = { getList, CreateList, UpdateList, DeleteFromList,viewSpesific }

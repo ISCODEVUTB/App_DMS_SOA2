@@ -18,7 +18,7 @@ connection.connect((err)=>{
 //metodos :
 
 function insert(data, callback){
-    let insertQuery = `INSERT INTO documents values (0,'${data.Title}',${data.muestra},${data.venta},${data.precio},${data.img1},${data.img2})`;
+    let insertQuery = `INSERT INTO documents values (0,"${data.Title}",${data.muestra},${data.venta},${data.precio},"${data.img1}","${data.img2}");`;
     connection.query(insertQuery, (err, result)=>{
         if(err) throw err;
         callback(result);
@@ -55,7 +55,7 @@ function readSpecific2(data, callback){
 
 
 function update(data, callback){
-    let UpdateQuery = `UPDATE documents SET muestra = ${data.muestra} where ISBN = ${data.ISBN}`;
+    let UpdateQuery = `UPDATE documents SET muestra = ${data.muestra}, venta=${data.venta}, precio=${data.precio} where ISBN = ${data.ISBN}`;
     connection.query(UpdateQuery, (err, result)=>{
         if(err) throw err;
         callback(result); 
